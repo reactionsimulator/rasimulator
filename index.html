@@ -54,7 +54,6 @@
     .eyebrow:before{content:"";width:44px;height:2px;background:#d8e9ff;display:block}
     .hero h1{margin:0;font-size:clamp(44px,7vw,92px);line-height:1.06;letter-spacing:-.07em;font-weight:800}
     .hero p{margin:28px 0 0;font-size:clamp(17px,2vw,24px);line-height:1.7;color:rgba(255,255,255,.88);font-weight:500;max-width:700px}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:44px}
     .btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border-radius:999px;font-weight:800;font-size:15px;transition:.2s ease;border:1px solid rgba(255,255,255,.34)}
     .btn.primary{background:#fff;color:var(--navy)}
     .btn.secondary{background:rgba(255,255,255,.08);color:#fff;backdrop-filter:blur(8px)}
@@ -85,7 +84,22 @@
     .feature h3{margin:0 0 6px;font-size:21px;line-height:1.35;letter-spacing:-.04em;color:var(--navy)}
     .feature p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.75}
     .field-test{margin-top:52px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:var(--shadow)}
-    .field-test h3{margin:0 0 20px;font-size:26px;letter-spacing:-.04em;color:var(--navy)}
+    .field-test-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}
+    .field-test h3{margin:0;font-size:26px;letter-spacing:-.04em;color:var(--navy)}
+    .field-test p{margin:8px 0 0;color:var(--muted);font-size:15.5px}
+    .carousel-status{font-weight:900;color:var(--blue);font-size:14px;letter-spacing:.04em;white-space:nowrap}
+    .field-carousel{position:relative;overflow:hidden;border-radius:26px;background:#edf3f9}
+    .carousel-viewport{overflow:hidden;border-radius:26px}
+    .carousel-track{display:flex;transition:transform .38s ease;will-change:transform}
+    .carousel-slide{min-width:100%;aspect-ratio:16/9;background:#dce7f1}
+    .carousel-slide img{width:100%;height:100%;object-fit:cover}
+    .carousel-button{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:var(--navy);font-size:28px;font-weight:800;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:pointer;transition:.2s ease;z-index:2}
+    .carousel-button:hover{background:#fff;transform:translateY(-50%) scale(1.04)}
+    .carousel-button.prev{left:18px}
+    .carousel-button.next{right:18px}
+    .carousel-dots{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:18px;flex-wrap:wrap}
+    .carousel-dot{width:9px;height:9px;border-radius:999px;border:0;background:#c8d8e8;cursor:pointer;transition:.2s ease;padding:0}
+    .carousel-dot.is-active{width:28px;background:var(--blue)}
     .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
     .photo-grid img{height:185px;width:100%;object-fit:cover;border-radius:18px}
 
@@ -129,7 +143,7 @@
       .nav{gap:18px;font-size:14px}.about-grid{grid-template-columns:repeat(2,1fr)}.product-layout,.location-layout{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.timeline:before{display:none}.link-grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,1fr)}.footer-wrap{align-items:flex-start;flex-direction:column}
     }
     @media (max-width:640px){
-      .container{width:min(100% - 28px,var(--max))}.site-header,.nav-wrap{height:68px}.brand img{width:74px}.nav{display:none}.hero-content{padding-top:68px}.hero h1{font-size:42px}.hero p{font-size:16px}.hero-actions{margin-top:30px}section{padding:78px 0}.about-grid,.timeline,.photo-grid{grid-template-columns:1fr}.info-card{min-height:auto}.product-media,.field-test,.address-card{border-radius:22px;padding:18px}.thumb{height:190px}.map-box{height:340px}.footer-logo img{width:74px}
+      .container{width:min(100% - 28px,var(--max))}.site-header,.nav-wrap{height:68px}.brand img{width:74px}.nav{display:none}.hero-content{padding-top:68px}.hero h1{font-size:42px}.hero p{font-size:16px}section{padding:78px 0}.about-grid,.timeline,.photo-grid{grid-template-columns:1fr}.info-card{min-height:auto}.product-media,.field-test,.address-card{border-radius:22px;padding:18px}.thumb{height:190px}.map-box{height:340px}.footer-logo img{width:74px}.field-test-head{align-items:flex-start;flex-direction:column}.carousel-slide{aspect-ratio:4/3}.carousel-button{width:40px;height:40px;font-size:24px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}
     }
   </style>
 </head>
@@ -141,7 +155,7 @@
         <span class="brand-name">Reactionsimulator</span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="#about">회사소개</a>
+        <a href="#top">회사소개</a>
         <a href="#product">제품소개</a>
         <a href="#history">개발연혁</a>
         <a href="#links">링크</a>
@@ -160,30 +174,10 @@
             <div class="eyebrow">Reactionsimulator</div>
             <h1>디지털 반작용을 통한<br>공간 제약 해소</h1>
             <p>실제 낚시의 손맛을 실내에서 경험할 수 있는<br>가정용 낚시 시뮬레이터를 개발합니다.</p>
-            <div class="hero-actions">
-              <a class="btn primary" href="#about">회사소개</a>
-              <a class="btn secondary" href="#product">제품소개</a>
-            </div>
           </div>
         </div>
       </div>
-      <a class="scroll-cue" href="#about" aria-label="아래로 이동"><span></span></a>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">About</div>
-          <h2>회사소개</h2>
-          <p class="lead">Reactionsimulator는 하드웨어와 소프트웨어의 융합 기술을 기반으로, 실내에서도 실제 낚시의 손맛을 구현하는 가정용 낚시 시뮬레이터를 개발합니다. 사용자에게 몰입감 있고 사실적인 경험을 제공하며, 새로운 레저 문화를 만들어갑니다.</p>
-        </div>
-        <div class="about-grid">
-          <article class="info-card"><div class="icon">◎</div><b>MISSION</b><strong>디지털 반작용을 통한<br>공간 제약 해소</strong></article>
-          <article class="info-card"><div class="icon">▥</div><b>MARKET ENTRY</b><strong>가정용 낚시<br>시뮬레이터</strong></article>
-          <article class="info-card"><div class="icon">◉</div><b>VISION</b><strong>실내에서도 실제 같은<br>디지털 낚시 경험 구축</strong></article>
-          <article class="info-card"><div class="icon">▣</div><b>CORE COMPETENCY</b><strong>소프트웨어와<br>하드웨어의 융합 능력</strong></article>
-        </div>
-      </div>
+      <a class="scroll-cue" href="#product" aria-label="제품소개로 이동"><span></span></a>
     </section>
 
     <section id="product" class="product">
@@ -203,13 +197,43 @@
             <article class="feature"><div class="icon">≈</div><div><h3>수중 생태계 구현</h3><p>물리학 기반 기획을 통해 사실적인 수중 환경과 어종별 체험을 구현합니다.</p></div></article>
           </div>
         </div>
-        <div class="field-test">
-          <h3>수많은 필드테스트를 통해 검증된 설계</h3>
-          <div class="photo-grid">
-            <img src="assets/exhibition_01.png" alt="필드테스트 및 행사 참가 사진 1">
-            <img src="assets/exhibition_02.png" alt="필드테스트 및 행사 참가 사진 2">
-            <img src="assets/exhibition_03.png" alt="필드테스트 및 행사 참가 사진 3">
-            <img src="assets/exhibition_04.png" alt="필드테스트 및 행사 참가 사진 4">
+        <div class="field-test" id="field-test">
+          <div class="field-test-head">
+            <div>
+              <h3>수많은 필드테스트를 통해 검증된 설계</h3>
+              <p>전시와 체험 현장에서 축적한 필드테스트 사진을 좌우로 넘겨 확인할 수 있습니다.</p>
+            </div>
+            <div class="carousel-status" aria-live="polite"><span id="currentSlide">1</span> / 10</div>
+          </div>
+          <div class="field-carousel" data-carousel>
+            <button class="carousel-button prev" type="button" aria-label="이전 사진" data-carousel-prev>‹</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track" data-carousel-track>
+              <figure class="carousel-slide"><img src="assets/field_test_01.jpg" alt="필드테스트 및 전시 현장 사진 1"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_02.jpg" alt="필드테스트 및 전시 현장 사진 2"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_03.jpg" alt="필드테스트 및 전시 현장 사진 3"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_04.jpg" alt="필드테스트 및 전시 현장 사진 4"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_05.jpg" alt="필드테스트 및 전시 현장 사진 5"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_06.jpg" alt="필드테스트 및 전시 현장 사진 6"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_07.jpg" alt="필드테스트 및 전시 현장 사진 7"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_08.jpg" alt="필드테스트 및 전시 현장 사진 8"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_09.jpg" alt="필드테스트 및 전시 현장 사진 9"></figure>
+              <figure class="carousel-slide"><img src="assets/field_test_10.jpg" alt="필드테스트 및 전시 현장 사진 10"></figure>
+              </div>
+            </div>
+            <button class="carousel-button next" type="button" aria-label="다음 사진" data-carousel-next>›</button>
+          </div>
+          <div class="carousel-dots" aria-label="필드테스트 사진 선택">
+            <button class="carousel-dot is-active" type="button" aria-label="1번 사진 보기" data-slide-to="0"></button>
+            <button class="carousel-dot" type="button" aria-label="2번 사진 보기" data-slide-to="1"></button>
+            <button class="carousel-dot" type="button" aria-label="3번 사진 보기" data-slide-to="2"></button>
+            <button class="carousel-dot" type="button" aria-label="4번 사진 보기" data-slide-to="3"></button>
+            <button class="carousel-dot" type="button" aria-label="5번 사진 보기" data-slide-to="4"></button>
+            <button class="carousel-dot" type="button" aria-label="6번 사진 보기" data-slide-to="5"></button>
+            <button class="carousel-dot" type="button" aria-label="7번 사진 보기" data-slide-to="6"></button>
+            <button class="carousel-dot" type="button" aria-label="8번 사진 보기" data-slide-to="7"></button>
+            <button class="carousel-dot" type="button" aria-label="9번 사진 보기" data-slide-to="8"></button>
+            <button class="carousel-dot" type="button" aria-label="10번 사진 보기" data-slide-to="9"></button>
           </div>
         </div>
       </div>
@@ -285,5 +309,41 @@
       <a class="privacy" href="#">개인정보처리방침</a>
     </div>
   </footer>
+
+  <script>
+    (function(){
+      const carousel = document.querySelector('[data-carousel]');
+      if(!carousel) return;
+      const track = document.querySelector('[data-carousel-track]');
+      const slides = Array.from(track.children);
+      const prev = document.querySelector('[data-carousel-prev]');
+      const next = document.querySelector('[data-carousel-next]');
+      const dots = Array.from(document.querySelectorAll('[data-slide-to]'));
+      const current = document.getElementById('currentSlide');
+      let index = 0;
+
+      function updateCarousel(){
+        track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
+        if(current) current.textContent = String(index + 1);
+      }
+
+      function goTo(newIndex){
+        index = (newIndex + slides.length) % slides.length;
+        updateCarousel();
+      }
+
+      prev.addEventListener('click', () => goTo(index - 1));
+      next.addEventListener('click', () => goTo(index + 1));
+      dots.forEach(dot => dot.addEventListener('click', () => goTo(Number(dot.dataset.slideTo))));
+
+      carousel.addEventListener('keydown', (event) => {
+        if(event.key === 'ArrowLeft') goTo(index - 1);
+        if(event.key === 'ArrowRight') goTo(index + 1);
+      });
+      carousel.tabIndex = 0;
+      updateCarousel();
+    })();
+  </script>
 </body>
 </html>
