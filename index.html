@@ -88,12 +88,12 @@
     .field-test h3{margin:0;font-size:26px;letter-spacing:-.04em;color:var(--navy)}
     .field-test p{margin:8px 0 0;color:var(--muted);font-size:15.5px}
     .carousel-status{font-weight:900;color:var(--blue);font-size:14px;letter-spacing:.04em;white-space:nowrap}
-    .field-carousel{position:relative;overflow:hidden;border-radius:26px;background:#edf3f9}
-    .carousel-viewport{overflow:hidden;border-radius:26px}
-    .carousel-track{display:flex;transition:transform .38s ease;will-change:transform}
-    .carousel-slide{min-width:100%;aspect-ratio:16/9;background:#dce7f1}
-    .carousel-slide img{width:100%;height:100%;object-fit:cover}
-    .carousel-button{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:var(--navy);font-size:28px;font-weight:800;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:pointer;transition:.2s ease;z-index:2}
+    .field-carousel{position:relative;overflow:hidden;border-radius:26px;background:#f4f8fc;border:1px solid var(--line)}
+    .carousel-viewport{overflow:hidden;border-radius:26px;padding:16px;background:#f4f8fc}
+    .carousel-track{display:flex;gap:16px;transition:transform .38s ease;will-change:transform}
+    .carousel-slide{flex:0 0 calc((100% - 48px) / 4);aspect-ratio:4/3;margin:0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(8,33,58,.05)}
+    .carousel-slide img{width:100%;height:100%;object-fit:contain;background:#fff}
+    .carousel-button{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:0;border-radius:999px;background:rgba(255,255,255,.95);color:var(--navy);font-size:28px;font-weight:800;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:pointer;transition:.2s ease;z-index:2}
     .carousel-button:hover{background:#fff;transform:translateY(-50%) scale(1.04)}
     .carousel-button.prev{left:18px}
     .carousel-button.next{right:18px}
@@ -143,7 +143,13 @@
       .nav{gap:18px;font-size:14px}.about-grid{grid-template-columns:repeat(2,1fr)}.product-layout,.location-layout{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.timeline:before{display:none}.link-grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,1fr)}.footer-wrap{align-items:flex-start;flex-direction:column}
     }
     @media (max-width:640px){
-      .container{width:min(100% - 28px,var(--max))}.site-header,.nav-wrap{height:68px}.brand img{width:74px}.nav{display:none}.hero-content{padding-top:68px}.hero h1{font-size:42px}.hero p{font-size:16px}section{padding:78px 0}.about-grid,.timeline,.photo-grid{grid-template-columns:1fr}.info-card{min-height:auto}.product-media,.field-test,.address-card{border-radius:22px;padding:18px}.thumb{height:190px}.map-box{height:340px}.footer-logo img{width:74px}.field-test-head{align-items:flex-start;flex-direction:column}.carousel-slide{aspect-ratio:4/3}.carousel-button{width:40px;height:40px;font-size:24px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}
+      .container{width:min(100% - 28px,var(--max))}.site-header,.nav-wrap{height:68px}.brand img{width:74px}.nav{display:none}.hero-content{padding-top:68px}.hero h1{font-size:42px}.hero p{font-size:16px}section{padding:78px 0}.about-grid,.timeline,.photo-grid{grid-template-columns:1fr}.info-card{min-height:auto}.product-media,.field-test,.address-card{border-radius:22px;padding:18px}.thumb{height:190px}.map-box{height:340px}.footer-logo img{width:74px}.field-test-head{align-items:flex-start;flex-direction:column}.carousel-slide{flex-basis:calc((100% - 16px) / 2);aspect-ratio:4/3}.carousel-button{width:40px;height:40px;font-size:24px}.carousel-button.prev{left:10px}.carousel-button.next{right:10px}
+    }
+
+    @media (max-width:520px){
+      .carousel-slide{flex-basis:100%}
+      .carousel-viewport{padding:12px}
+      .carousel-track{gap:12px}
     }
   </style>
 </head>
@@ -203,7 +209,7 @@
               <h3>수많은 필드테스트를 통해 검증된 설계</h3>
               <p>전시와 체험 현장에서 축적한 필드테스트 사진을 좌우로 넘겨 확인할 수 있습니다.</p>
             </div>
-            <div class="carousel-status" aria-live="polite"><span id="currentSlide">1</span> / 10</div>
+            <div class="carousel-status" aria-live="polite"><span id="currentSlideRange">1–4</span> / 10</div>
           </div>
           <div class="field-carousel" data-carousel>
             <button class="carousel-button prev" type="button" aria-label="이전 사진" data-carousel-prev>‹</button>
@@ -223,17 +229,14 @@
             </div>
             <button class="carousel-button next" type="button" aria-label="다음 사진" data-carousel-next>›</button>
           </div>
-          <div class="carousel-dots" aria-label="필드테스트 사진 선택">
-            <button class="carousel-dot is-active" type="button" aria-label="1번 사진 보기" data-slide-to="0"></button>
-            <button class="carousel-dot" type="button" aria-label="2번 사진 보기" data-slide-to="1"></button>
-            <button class="carousel-dot" type="button" aria-label="3번 사진 보기" data-slide-to="2"></button>
-            <button class="carousel-dot" type="button" aria-label="4번 사진 보기" data-slide-to="3"></button>
-            <button class="carousel-dot" type="button" aria-label="5번 사진 보기" data-slide-to="4"></button>
-            <button class="carousel-dot" type="button" aria-label="6번 사진 보기" data-slide-to="5"></button>
-            <button class="carousel-dot" type="button" aria-label="7번 사진 보기" data-slide-to="6"></button>
-            <button class="carousel-dot" type="button" aria-label="8번 사진 보기" data-slide-to="7"></button>
-            <button class="carousel-dot" type="button" aria-label="9번 사진 보기" data-slide-to="8"></button>
-            <button class="carousel-dot" type="button" aria-label="10번 사진 보기" data-slide-to="9"></button>
+          <div class="carousel-dots" aria-label="필드테스트 사진 묶음 선택">
+            <button class="carousel-dot is-active" type="button" aria-label="1-4번 사진 보기" data-slide-to="0"></button>
+            <button class="carousel-dot" type="button" aria-label="2-5번 사진 보기" data-slide-to="1"></button>
+            <button class="carousel-dot" type="button" aria-label="3-6번 사진 보기" data-slide-to="2"></button>
+            <button class="carousel-dot" type="button" aria-label="4-7번 사진 보기" data-slide-to="3"></button>
+            <button class="carousel-dot" type="button" aria-label="5-8번 사진 보기" data-slide-to="4"></button>
+            <button class="carousel-dot" type="button" aria-label="6-9번 사진 보기" data-slide-to="5"></button>
+            <button class="carousel-dot" type="button" aria-label="7-10번 사진 보기" data-slide-to="6"></button>
           </div>
         </div>
       </div>
@@ -306,10 +309,8 @@
         주소: 인천광역시 서구 봉수대로 806 인천시 스포츠산업 창업지원실<br>
         Copyright © Reactionsimulator Co., Ltd. All rights reserved.
       </div>
-      <a class="privacy" href="#">개인정보처리방침</a>
     </div>
   </footer>
-
   <script>
     (function(){
       const carousel = document.querySelector('[data-carousel]');
@@ -319,23 +320,59 @@
       const prev = document.querySelector('[data-carousel-prev]');
       const next = document.querySelector('[data-carousel-next]');
       const dots = Array.from(document.querySelectorAll('[data-slide-to]'));
-      const current = document.getElementById('currentSlide');
+      const currentRange = document.getElementById('currentSlideRange');
       let index = 0;
 
+      function getVisibleCount(){
+        if(window.matchMedia('(max-width:520px)').matches) return 1;
+        if(window.matchMedia('(max-width:860px)').matches) return 2;
+        return 4;
+      }
+
+      function getGap(){
+        const style = window.getComputedStyle(track);
+        return parseFloat(style.columnGap || style.gap || '0') || 0;
+      }
+
+      function maxIndex(){
+        return Math.max(0, slides.length - getVisibleCount());
+      }
+
+      function clampIndex(value){
+        return Math.min(Math.max(value, 0), maxIndex());
+      }
+
+      function updateDots(){
+        dots.forEach((dot, dotIndex) => {
+          const target = Number(dot.dataset.slideTo);
+          dot.classList.toggle('is-active', target === index);
+          dot.hidden = target > maxIndex();
+        });
+      }
+
       function updateCarousel(){
-        track.style.transform = `translateX(${-index * 100}%)`;
-        dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
-        if(current) current.textContent = String(index + 1);
+        index = clampIndex(index);
+        const firstSlide = slides[0];
+        const move = index * (firstSlide.getBoundingClientRect().width + getGap());
+        track.style.transform = `translateX(${-move}px)`;
+        const visible = getVisibleCount();
+        if(currentRange){
+          const start = index + 1;
+          const end = Math.min(index + visible, slides.length);
+          currentRange.textContent = visible === 1 ? String(start) : `${start}–${end}`;
+        }
+        updateDots();
       }
 
       function goTo(newIndex){
-        index = (newIndex + slides.length) % slides.length;
+        index = clampIndex(newIndex);
         updateCarousel();
       }
 
       prev.addEventListener('click', () => goTo(index - 1));
       next.addEventListener('click', () => goTo(index + 1));
       dots.forEach(dot => dot.addEventListener('click', () => goTo(Number(dot.dataset.slideTo))));
+      window.addEventListener('resize', updateCarousel);
 
       carousel.addEventListener('keydown', (event) => {
         if(event.key === 'ArrowLeft') goTo(index - 1);
