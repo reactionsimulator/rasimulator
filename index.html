@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>㈜리액션시뮬레이터 | 가정용 낚시 시뮬레이터 손맛</title>
+  <meta name="description" content="디지털 반작용을 통한 공간 제약 해소. 리액션시뮬레이터는 실제 낚시의 손맛을 실내에서 경험할 수 있는 가정용 낚시 시뮬레이터를 개발합니다." />
+  <meta property="og:title" content="㈜리액션시뮬레이터" />
+  <meta property="og:description" content="가정용 낚시 시뮬레이터 ‘손맛’" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero_poster.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#071827;
+      --navy2:#0b2238;
+      --blue:#0d64c7;
+      --blue2:#2f89ff;
+      --text:#132033;
+      --muted:#66758a;
+      --line:#e7edf4;
+      --soft:#f5f8fb;
+      --white:#fff;
+      --shadow:0 18px 48px rgba(9,30,52,.10);
+      --radius:22px;
+      --max:1160px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Pretendard,Apple SD Gothic Neo,Noto Sans KR,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;color:var(--text);background:#fff;line-height:1.65;word-break:keep-all}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),calc(100% - 48px));margin:0 auto}
+
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:50;height:76px;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(231,237,244,.8)}
+    .nav-wrap{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:160px}
+    .brand img{width:96px;height:auto}
+    .brand-name{display:none;font-weight:800;letter-spacing:-.02em;color:var(--navy)}
+    .nav{display:flex;align-items:center;gap:34px;font-size:15px;font-weight:700;color:#15263b}
+    .nav a{opacity:.85;transition:.2s ease}
+    .nav a:hover{opacity:1;color:var(--blue)}
+
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--navy);color:#fff}
+    .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .hero .poster{background:url('assets/hero_poster.jpg') center/cover no-repeat;z-index:0}
+    .hero video{z-index:1}
+    .hero:after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(3,16,28,.78) 0%,rgba(3,16,28,.54) 44%,rgba(3,16,28,.32) 100%),linear-gradient(180deg,rgba(3,16,28,.34) 0%,rgba(3,16,28,.08) 44%,rgba(3,16,28,.66) 100%)}
+    .hero-content{position:relative;z-index:3;padding-top:76px;width:100%}
+    .hero-copy{max-width:760px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;color:#d8e9ff;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:44px;height:2px;background:#d8e9ff;display:block}
+    .hero h1{margin:0;font-size:clamp(44px,7vw,92px);line-height:1.06;letter-spacing:-.07em;font-weight:800}
+    .hero p{margin:28px 0 0;font-size:clamp(17px,2vw,24px);line-height:1.7;color:rgba(255,255,255,.88);font-weight:500;max-width:700px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:44px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border-radius:999px;font-weight:800;font-size:15px;transition:.2s ease;border:1px solid rgba(255,255,255,.34)}
+    .btn.primary{background:#fff;color:var(--navy)}
+    .btn.secondary{background:rgba(255,255,255,.08);color:#fff;backdrop-filter:blur(8px)}
+    .btn:hover{transform:translateY(-2px)}
+    .scroll-cue{position:absolute;z-index:4;bottom:32px;left:50%;transform:translateX(-50%);width:34px;height:54px;border:1px solid rgba(255,255,255,.45);border-radius:999px;display:flex;justify-content:center;padding-top:10px}
+    .scroll-cue span{width:6px;height:6px;background:#fff;border-radius:50%;animation:scrollDot 1.6s infinite}
+    @keyframes scrollDot{0%{transform:translateY(0);opacity:1}100%{transform:translateY(20px);opacity:.05}}
+
+    section{padding:110px 0;scroll-margin-top:86px}
+    .section-head{margin-bottom:48px}
+    .kicker{font-size:14px;font-weight:900;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+    h2{margin:0;font-size:clamp(34px,4vw,54px);letter-spacing:-.055em;line-height:1.16;color:var(--navy);font-weight:850}
+    .lead{margin:20px 0 0;max-width:760px;font-size:18px;color:var(--muted);line-height:1.8}
+
+    .about-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}
+    .info-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px;box-shadow:0 12px 36px rgba(8,33,58,.06);min-height:210px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;transition:.2s ease}
+    .info-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .icon{width:48px;height:48px;border-radius:14px;background:#edf5ff;color:var(--blue);display:grid;place-items:center;font-size:23px;font-weight:900}
+    .info-card b{font-size:13px;letter-spacing:.08em;color:var(--muted)}
+    .info-card strong{font-size:20px;line-height:1.45;letter-spacing:-.035em;color:var(--navy)}
+
+    .product{background:linear-gradient(180deg,#f7fafc 0%,#fff 100%)}
+    .product-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+    .product-media{position:relative;background:#fff;border:1px solid var(--line);border-radius:30px;overflow:hidden;box-shadow:var(--shadow);padding:20px}
+    .product-media img{border-radius:20px;width:100%;height:auto}
+    .feature-list{display:grid;gap:16px}
+    .feature{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 30px rgba(8,33,58,.05)}
+    .feature h3{margin:0 0 6px;font-size:21px;line-height:1.35;letter-spacing:-.04em;color:var(--navy)}
+    .feature p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.75}
+    .field-test{margin-top:52px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:var(--shadow)}
+    .field-test h3{margin:0 0 20px;font-size:26px;letter-spacing:-.04em;color:var(--navy)}
+    .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .photo-grid img{height:185px;width:100%;object-fit:cover;border-radius:18px}
+
+    .history{background:#fff}
+    .timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:60px}
+    .timeline:before{content:"";position:absolute;left:0;right:0;top:34px;height:2px;background:linear-gradient(90deg,var(--blue),#b9d8ff);z-index:0}
+    .milestone{position:relative;z-index:1;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 28px rgba(8,33,58,.06)}
+    .milestone .dot{width:68px;height:68px;border-radius:999px;background:#eff6ff;border:2px solid #c9e0ff;color:var(--blue);display:grid;place-items:center;font-size:27px;margin-bottom:22px}
+    .milestone time{font-size:16px;font-weight:900;color:var(--blue);display:block;margin-bottom:8px}
+    .milestone p{margin:0;color:#2d3b4f;font-weight:650;line-height:1.6;letter-spacing:-.025em}
+
+    .links{background:var(--soft)}
+    .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .media-card{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 34px rgba(8,33,58,.07);transition:.2s ease}
+    .media-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .thumb{position:relative;height:210px;overflow:hidden;background:#0b2238}
+    .thumb img{width:100%;height:100%;object-fit:cover;opacity:.88;filter:saturate(.95) contrast(1.02)}
+    .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:999px;background:rgba(255,255,255,.9);display:grid;place-items:center;box-shadow:0 12px 34px rgba(0,0,0,.22)}
+    .play:before{content:"";border-left:18px solid var(--blue);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px}
+    .media-body{padding:22px}
+    .media-body h3{margin:0 0 10px;font-size:20px;letter-spacing:-.035em;color:var(--navy);line-height:1.35}
+    .media-body span{font-size:14px;color:var(--muted);font-weight:700}
+
+    .location-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+    .map-box{height:410px;border-radius:30px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#e8eef4}
+    .map-box iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.8)}
+    .address-card{background:#fff;border:1px solid var(--line);border-radius:30px;padding:40px;box-shadow:0 12px 36px rgba(8,33,58,.06)}
+    .address-card h2{font-size:44px}
+    .address{display:flex;gap:14px;align-items:flex-start;margin:28px 0 28px;font-size:20px;font-weight:800;color:var(--navy);line-height:1.6;letter-spacing:-.035em}
+    .pin{width:42px;height:42px;flex:0 0 auto;border-radius:14px;background:#edf5ff;color:var(--blue);display:grid;place-items:center;font-size:22px}
+    .map-link{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border:1px solid var(--line);border-radius:999px;font-weight:850;color:var(--navy);background:#fff;box-shadow:0 8px 22px rgba(8,33,58,.06)}
+
+    footer{background:linear-gradient(135deg,#061320,#0b2238);color:#fff;padding:44px 0}
+    .footer-wrap{display:flex;align-items:center;gap:32px;justify-content:space-between}
+    .footer-logo img{width:92px;filter:brightness(0) invert(1)}
+    .footer-info{flex:1;color:rgba(255,255,255,.82);font-size:14px;line-height:1.9}
+    .footer-info strong{color:#fff;font-weight:850}
+    .privacy{color:rgba(255,255,255,.72);font-size:14px;font-weight:700;white-space:nowrap}
+
+    @media (max-width:960px){
+      .nav{gap:18px;font-size:14px}.about-grid{grid-template-columns:repeat(2,1fr)}.product-layout,.location-layout{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.timeline:before{display:none}.link-grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,1fr)}.footer-wrap{align-items:flex-start;flex-direction:column}
+    }
+    @media (max-width:640px){
+      .container{width:min(100% - 28px,var(--max))}.site-header,.nav-wrap{height:68px}.brand img{width:74px}.nav{display:none}.hero-content{padding-top:68px}.hero h1{font-size:42px}.hero p{font-size:16px}.hero-actions{margin-top:30px}section{padding:78px 0}.about-grid,.timeline,.photo-grid{grid-template-columns:1fr}.info-card{min-height:auto}.product-media,.field-test,.address-card{border-radius:22px;padding:18px}.thumb{height:190px}.map-box{height:340px}.footer-logo img{width:74px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="Reactionsimulator home">
+        <img src="assets/logo_transparent.png" alt="Reactionsimulator logo">
+        <span class="brand-name">Reactionsimulator</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#about">회사소개</a>
+        <a href="#product">제품소개</a>
+        <a href="#history">개발연혁</a>
+        <a href="#links">링크</a>
+        <a href="#location">오시는길</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="첫 화면">
+      <div class="poster" aria-hidden="true"></div>
+      <video src="assets/hero_video.mp4" poster="assets/hero_poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="낚시 광고 영상"></video>
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-copy">
+            <div class="eyebrow">Reactionsimulator</div>
+            <h1>디지털 반작용을 통한<br>공간 제약 해소</h1>
+            <p>실제 낚시의 손맛을 실내에서 경험할 수 있는<br>가정용 낚시 시뮬레이터를 개발합니다.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#about">회사소개</a>
+              <a class="btn secondary" href="#product">제품소개</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="아래로 이동"><span></span></a>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">About</div>
+          <h2>회사소개</h2>
+          <p class="lead">Reactionsimulator는 하드웨어와 소프트웨어의 융합 기술을 기반으로, 실내에서도 실제 낚시의 손맛을 구현하는 가정용 낚시 시뮬레이터를 개발합니다. 사용자에게 몰입감 있고 사실적인 경험을 제공하며, 새로운 레저 문화를 만들어갑니다.</p>
+        </div>
+        <div class="about-grid">
+          <article class="info-card"><div class="icon">◎</div><b>MISSION</b><strong>디지털 반작용을 통한<br>공간 제약 해소</strong></article>
+          <article class="info-card"><div class="icon">▥</div><b>MARKET ENTRY</b><strong>가정용 낚시<br>시뮬레이터</strong></article>
+          <article class="info-card"><div class="icon">◉</div><b>VISION</b><strong>실내에서도 실제 같은<br>디지털 낚시 경험 구축</strong></article>
+          <article class="info-card"><div class="icon">▣</div><b>CORE COMPETENCY</b><strong>소프트웨어와<br>하드웨어의 융합 능력</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="product" class="product">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Product</div>
+          <h2>가정용 낚시 시뮬레이터 ‘손맛’</h2>
+          <p class="lead">수많은 필드테스트를 통해 검증된 설계를 바탕으로, 실제 낚시의 조작감과 물고기의 저항감을 실내에서 재현합니다.</p>
+        </div>
+        <div class="product-layout">
+          <div class="product-media">
+            <img src="assets/product_overview.png" alt="가정용 낚시 시뮬레이터 손맛 제품 소개 이미지">
+          </div>
+          <div class="feature-list">
+            <article class="feature"><div class="icon">魚</div><div><h3>다양한 어종의 손맛</h3><p>BLDC 6-step 제어 기술로 실제와 같은 저항감과 토크감을 구현합니다.</p></div></article>
+            <article class="feature"><div class="icon">∞</div><div><h3>가족과 함께 플레이</h3><p>스마트폰과 BLE 통신으로 2기 이상 연결하여 가족과 함께 즐길 수 있습니다.</p></div></article>
+            <article class="feature"><div class="icon">≈</div><div><h3>수중 생태계 구현</h3><p>물리학 기반 기획을 통해 사실적인 수중 환경과 어종별 체험을 구현합니다.</p></div></article>
+          </div>
+        </div>
+        <div class="field-test">
+          <h3>수많은 필드테스트를 통해 검증된 설계</h3>
+          <div class="photo-grid">
+            <img src="assets/exhibition_01.png" alt="필드테스트 및 행사 참가 사진 1">
+            <img src="assets/exhibition_02.png" alt="필드테스트 및 행사 참가 사진 2">
+            <img src="assets/exhibition_03.png" alt="필드테스트 및 행사 참가 사진 3">
+            <img src="assets/exhibition_04.png" alt="필드테스트 및 행사 참가 사진 4">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="history">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">History</div>
+          <h2>10년에 걸친 개발 기간</h2>
+          <p class="lead">리액션시뮬레이터는 실내 낚시 체험을 구현하기 위해 제품, 콘텐츠, 전시 경험을 지속적으로 개선해왔습니다.</p>
+        </div>
+        <div class="timeline">
+          <article class="milestone"><div class="dot">♜</div><time>2017.12</time><p>제9회 보조기기 공모전 특별상 수상</p></article>
+          <article class="milestone"><div class="dot">🤝</div><time>2020.03</time><p>중소벤처기업진흥공단 청년창업사관학교 10기 지원 협약</p></article>
+          <article class="milestone"><div class="dot">★</div><time>2020.11</time><p>G-star 2020 중소 및 인디 우수게임 선정</p></article>
+          <article class="milestone"><div class="dot">▤</div><time>2021.04</time><p>한국콘텐츠진흥원 게임기업 육성 지원사업 선정</p></article>
+          <article class="milestone"><div class="dot">🏅</div><time>2021.10</time><p>성남산업진흥원 인디크래프트 국내부문 TOP 5 선정</p></article>
+          <article class="milestone"><div class="dot">⚑</div><time>2022.03</time><p>스포츠서울 2022 Innovation 기업&브랜드 대상 레저 낚시 부문</p></article>
+          <article class="milestone"><div class="dot">↟</div><time>2022.05</time><p>경기콘텐츠진흥원 2022 초기창업기업 성장지원 프로그램 선정</p></article>
+          <article class="milestone"><div class="dot">⚑</div><time>2026.04</time><p>문화체육관광부 2026 스포츠산업 예비초기창업 선정</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="links" class="links">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Media & Links</div>
+          <h2>링크</h2>
+          <p class="lead">전시, 방송, 쇼케이스에서 공개된 리액션시뮬레이터의 콘텐츠를 영상으로 확인할 수 있습니다.</p>
+        </div>
+        <div class="link-grid">
+          <a class="media-card" href="https://youtu.be/ZniMZGVfJFA?si=a_FBGz6Y7XLotk6V&t=3253" target="_blank" rel="noopener noreferrer">
+            <div class="thumb"><img src="assets/exhibition_02.png" alt="2021성남e스포츠 페스티벌"><div class="play"></div></div>
+            <div class="media-body"><h3>2021성남e스포츠 페스티벌</h3><span>YouTube ↗</span></div>
+          </a>
+          <a class="media-card" href="https://youtu.be/6cjtH3wJxeo?si=MayIFYjyMsNPGbK5" target="_blank" rel="noopener noreferrer">
+            <div class="thumb"><img src="assets/exhibition_01.png" alt="신영일의 비즈정보 플러스 171회"><div class="play"></div></div>
+            <div class="media-body"><h3>신영일의 비즈정보 플러스 171회</h3><span>YouTube ↗</span></div>
+          </a>
+          <a class="media-card" href="https://youtu.be/amRLz2DSVqc?si=IlQTg8d6J1GVkqva&t=628" target="_blank" rel="noopener noreferrer">
+            <div class="thumb"><img src="assets/exhibition_03.png" alt="BIC SHOWCASE 2021"><div class="play"></div></div>
+            <div class="media-body"><h3>BIC SHOWCASE 2021</h3><span>YouTube ↗</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="container location-layout">
+        <div class="map-box" aria-label="Google Map">
+          <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%84%9C%EA%B5%AC%20%EB%B4%89%EC%88%98%EB%8C%80%EB%A1%9C%20806%20%EC%9D%B8%EC%B2%9C%EC%8B%9C%20%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%82%B0%EC%97%85%20%EC%B0%BD%EC%97%85%EC%A7%80%EC%9B%90%EC%8B%A4&output=embed"></iframe>
+        </div>
+        <div class="address-card">
+          <div class="kicker">Location</div>
+          <h2>오시는길</h2>
+          <div class="address"><span class="pin">⌖</span><span>인천광역시 서구 봉수대로 806<br>인천시 스포츠산업 창업지원실</span></div>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%84%9C%EA%B5%AC%20%EB%B4%89%EC%88%98%EB%8C%80%EB%A1%9C%20806" target="_blank" rel="noopener noreferrer">Google Map ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div class="footer-logo"><img src="assets/logo_transparent.png" alt="Reactionsimulator logo"></div>
+      <div class="footer-info">
+        <strong>㈜리액션시뮬레이터</strong> &nbsp;|&nbsp; 대표 김진수 &nbsp;|&nbsp; 사업자등록번호 893-87-03924<br>
+        주소: 인천광역시 서구 봉수대로 806 인천시 스포츠산업 창업지원실<br>
+        Copyright © Reactionsimulator Co., Ltd. All rights reserved.
+      </div>
+      <a class="privacy" href="#">개인정보처리방침</a>
+    </div>
+  </footer>
+</body>
+</html>
